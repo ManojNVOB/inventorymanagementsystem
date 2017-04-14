@@ -1,0 +1,35 @@
+select product_id from products where product_status='Refurbished' and inventory=225 and (specification like 'L%'or specification like 'D%')
+minus select product_id from refurbishes
+
+
+select part_id from parts where (part_name='KEYBOARD' or part_name='BATTERY') and consume_status='used' AND inventory=217
+
+/* printer minus query */
+select product_id from products where product_status='Refurbished' and inventory=217 and (specification like 'P%')
+minus select product_id from refurbishes
+
+/* all  minus query */
+select product_id from products where product_status='Refurbished' and inventory=217
+minus select product_id from refurbishes
+
+delete from products where product_id in (select product_id from products where product_status='Refurbished' and inventory=217 and (specification like 'L%'or specification like 'D%')
+minus select product_id from refurbishes)
+
+
+
+
+
+
+
+select part_id from parts where (part_name='BATTERY' OR part_name='KEYBOARD') and consume_status='used' minus select part_id from  refurbishes
+
+
+/*delete refurbishes*/
+
+delete from refurbishes
+
+alter table refurbishes add constraint uniprod unique (product_id)
+
+
+alter table refurbishes drop constraint uniprod 
+
